@@ -50,6 +50,9 @@ export default StyleSheet.create({
         marginTop: 10,
     },
 
+    colorYellow: {backgroundColor: '#f0f'},
+    colorOrange: {backgroundColor: '#00f'},
+
 })
 
 

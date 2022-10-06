@@ -1,79 +1,74 @@
-import { View, Text, StatusBar, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StatusBar, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 import styles from '../themes/styleList';
 import color from '../config/color';
-
-const ComponentItem = (props) => {
-
-    const item = props.item;
-
-    const number = item.id;
-    const numberText = number < 10 ? `0${number}` : number;
-
-
-    return (
-        <View style={[styles.row,
-        {
-            width: "100%",
-            marginBottom: 5,
-            padding: 10,
-            paddingHorizontal: 10,
-            backgroundColor: '#0ff',
-            borderRadius:5,
-        }]} >
-            <Text style={[{borderRadius:5, padding: 5, paddingHorizontal: 10, fontWeight: 'bold', color: '#fff', backgroundColor: color.red }]}   >{numberText}</Text>
-            <Text style={[styles.flex_1, { padding: 5, paddingHorizontal: 10 }]}   >{item.text}</Text>
-
-            <TouchableOpacity ><Text style={[{
-                borderRadius:5,
-                padding: 5, 
-                paddingHorizontal: 10, 
-                fontWeight: 'bold', 
-                color: '#fff', 
-                backgroundColor: color.red, 
-                textTransform: 'uppercase',
-                }]} >Del</Text></TouchableOpacity>
-        </View>
-    )
-}
-
+import ComponentItem from './ComponentItem';
 
 const ComponentList = (props) => {
 
     let db = [
         {
             id: 1,
-            text: 'AVan',
+            text: 'Java',
         },
         {
             id: 2,
-            text: 'AVan2',
+            text: 'JavaScript',
         },
         {
             id: 3,
-            text: 'AVan3',
+            text: 'PHP',
         },
     ];
 
     const [listData, setlistData] = useState([])
 
     useEffect(() => {
-      setlistData(db)
+        setlistData(db)
     }, []);
-    
+
 
     const [txtText, setTxtText] = useState('');
 
     //
     function funClickAdd() {
-        let idnew = listData.length+1;
+        console.log("🚀 ~ file: ComponentList.js ~ line 75 ~ funClickAdd ~ funClickAdd")
+        if (txtText.length == 0) {
+            return;
+        }
+        let val_end = listData[listData.length-1]  ;//   gia tri cuoi trong list
+        let idnew =  val_end.id + 1;
         let val = { id: idnew, text: txtText }
-        setlistData([...listData, val])
-        console.log("🚀 ~ file: ComponentList.js ~ line 62 ~ funClickAdd ~ val", val)
-        console.log("🚀 ~ file: ComponentList.js ~ line 55 ~ funClickAdd ~ listData", listData)
+        setlistData([...listData, val]);
 
     }
+    //
+    const funDeleteItem = (index) => {
+        console.log("🚀 ~ file: ComponentList.js ~ line 48 ~ funDeleteItem ~ funDeleteItem ")
+
+        let a_val = listData[index];
+        Alert.alert(
+            "Thông báo!!!",
+            `Bạn có muốn xóa ${a_val.text} không ? `,
+            [
+                {
+                    text: "Cancel",
+                },
+                { 
+                    text: "OK", 
+                    onPress: () => {
+                        const listDataTmp = [...listData];
+                        listDataTmp.splice(index,1);
+                        
+                        setlistData(listDataTmp);
+                    }
+                }
+            ]
+        );
+    }
+    
+
 
     return (
         <View style={[{}, styles.flex_1]} >
@@ -91,11 +86,13 @@ const ComponentList = (props) => {
             <View style={[styles.flex_4, {
                 padding: 10,
             }]}  >
-                {
-                    listData.map((item) => {
-                        return <ComponentItem key={item.id} item={item} />
-                    })
-                }
+                <ScrollView>
+                    {
+                        listData.map((item, index) => {
+                            return <ComponentItem key={index} item={item} funDelItem={() => {funDeleteItem(index)}} />
+                        })
+                    }
+                </ScrollView>
             </View>
 
             <StatusBar />
