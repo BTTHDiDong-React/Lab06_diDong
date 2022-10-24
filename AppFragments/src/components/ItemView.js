@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 
 import styles from '../themes/styleList';
@@ -8,16 +8,19 @@ import color from '../config/color';
 const ItemView = ( props ) => {
 
     let item = props.item;
+    let {onClickItem} = props; 
 
 
     return (
-        <View style={[styles.row, {
+        <TouchableOpacity style={[styles.row, {
             padding: 5,
             paddingHorizontal: 10,
             borderRadius: 10,
             backgroundColor: '#D9CEBA',
             marginBottom: 10,
-        }]}   >
+        }]}   
+            onPress={() => onClickItem(item)}
+        >
             <Image
                 source={item.linkImg}
 
@@ -28,7 +31,7 @@ const ItemView = ( props ) => {
                 <Text style={[{ fontWeight: '400', fontSize: 15, }]}  >Pls touch to see detail</Text>
             </View>
 
-        </View>
+        </TouchableOpacity>
     )
 }
 

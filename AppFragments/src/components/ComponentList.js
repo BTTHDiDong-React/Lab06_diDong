@@ -6,7 +6,7 @@ import ItemView from './ItemView';
 
 import color from '../config/color';
 
-const ComponentList = () => {
+const ComponentList = ( {navigation} ) => {
 
     let db = [
         {
@@ -71,17 +71,28 @@ const ComponentList = () => {
         setdataBD(db);
     }, [])
 
+    const onClickItem = (item) => {
+        navigation.navigate('Detail', item={item})
+    }
 
     //
     const renderItem = ({ item }) => {
         return (
-            <ItemView item={item}/>
+            <ItemView item={item} onClickItem={(item) => onClickItem(item)}/>
         )
     }
 
     return (
         <SafeAreaView style={[styles.flex_1, { padding: 20, backgroundColor: '#FFF9F9' }]}>
             <StatusBar />
+            <Text style={[  {
+                textAlign:'center',
+                fontSize: 20,
+                fontWeight: 'bold',
+                marginBottom: 10,
+                textTransform: 'uppercase',
+                color: '#0f0',
+            }]} >My shop</Text>
             
             <FlatList
                 data={dataBD}
