@@ -37,4 +37,4 @@ export default StyleSheet.create({
 
 
 
-///            style={[  {}]}               //
+///            style={[{}  ]}               //
