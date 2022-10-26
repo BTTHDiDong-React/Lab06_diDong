@@ -10,12 +10,12 @@ $	npm install react-native-screens react-native-safe-area-context
 
 $	npm install @react-navigation/native-stack
 
-import { NavigationContainer } from '@react-navigation/native';<br/>
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator();
-<br/>
- <NavigationContainer>
+    import { NavigationContainer } from '@react-navigation/native';<br/>
+    import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+    const Stack = createNativeStackNavigator();
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Layout1a} />
         <Stack.Screen name="Layout_1b" component={Layout1b} />
@@ -25,9 +25,9 @@ const Stack = createNativeStackNavigator();
 <br/>
 $	npm install --save react-native-vector-icons
 
-	-- import Icon from 'react-native-vector-icons/FontAwesome'
-    
- 	-- <Icon name="rocket" color="#eee" size={30} />
+	import Icon from 'react-native-vector-icons/FontAwesome'
+
+ 	<Icon name="rocket" color="#eee" size={30} />
 
 
 ## bài todo List: 
