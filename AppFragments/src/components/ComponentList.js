@@ -100,7 +100,6 @@ const ComponentList = ( {navigation} ) => {
                 keyExtractor={item => item.id}
             />
 
-            <Text>ComponentList</Text>
         </SafeAreaView>
     )
 }
