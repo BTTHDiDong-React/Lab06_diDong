@@ -1,15 +1,38 @@
-import { View, Text, StatusBar } from 'react-native'
-import React from 'react'
+import { View, Text, StatusBar, FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react'
 
 import styles from '../themes/styleList';
+import ComponentItem from './ComponentItem';
+import listUser from '../databases/db';
 
 const ComponentList = () => {
 
-let item = {
-    id : 1,
-    name : 'A van',
-    location: 'VN',
-}
+    const [data, setData] = useState([]);
+    // console.log("🚀 ~ file: ComponentList.js ~ line 11 ~ ComponentList ~ data", data)
+
+    useEffect(() => {
+        let db  = listUser;
+      setData(db);
+    
+    }, []);
+    
+
+    let item = {
+        id: 1,
+        name: 'A van ',
+        location: 'Việt Nam',
+    }
+    //
+    const renderItem =  ({item}) => {
+        return (
+            <ComponentItem item={item} onClickDel={(item) => onClickDel(item)} />
+        )
+    }
+
+    function  onClickDel(item) {
+        console.log("🚀 ~ file: ComponentList.js ~ line 34 ~ onClickDel ~ item", item)
+        
+    }
 
     return (
         <View style={[styles.flex_1, {}]}>
@@ -26,11 +49,18 @@ let item = {
                 }]} >Danh sách người dùng</Text>
             </View>
 
-            <View style={[{}, styles.flex_1]}  >
+            <View style={[{
+                marginHorizontal: 20,
+                marginVertical: 10,
+            }, styles.flex_1]}  >
+                {/* item */}
+                {/* <ComponentItem item={item} /> */}
 
-                <View   style= {[{ }  ]} >
-
-                </View>
+                <FlatList
+                    keyExtractor={item => item.id}
+                    data = {data}
+                    renderItem  = {renderItem}
+                />
 
             </View>
         </View>

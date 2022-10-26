@@ -39,3 +39,9 @@ $	npm install --save react-native-vector-icons
  <img src="./Ảnh minh họa/AppFragment_serceen1.png" alt="Hình ảnh không tồn tại" width=300>
  <img src="./Ảnh minh họa/AppFragment_serceen1.png" alt="Hình ảnh không tồn tại" width=300>
 
+
+ ## bài App-FetchAPI
+ #### run vs json server
+ 
+ <img src="./Ảnh minh họa/AppFetchAPI.png" alt="Hình ảnh không tồn tại" width=300>
+
